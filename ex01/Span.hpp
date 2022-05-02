@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybestrio <ybestrio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yasinbestrioui <yasinbestrioui@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 13:54:11 by ybestrio          #+#    #+#             */
-/*   Updated: 2022/04/29 13:04:51 by ybestrio         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:31:47 by yasinbestri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <list>
 #include <iterator>
 #include <algorithm>
+#include <vector>
+#include <array>
+
 
 class Span
 {
@@ -24,21 +27,38 @@ class Span
 public:
 	Span();
 	Span(const unsigned int N);
-	void	addNumber(const int n);
-	void	ft_printlist();
+	~Span();
+	Span(Span & other);
+	Span& operator=(Span & rhs);
+	
+	
+	int				getMaxSize();
+	int		getCurrent();
+	std::list<int>	getList();
 
-	const int	getMaxSize();
-	const int	getCurrent();
-
+	void		initCurrent();
 	void		setCurrent();
 
-	const int	shortestSpan();
-	const int	longestSpan();
-	
+	long long	shortestSpan();
+	long long	longestSpan();
+	void		addNumber(const int n);
+	void		ft_printlist();
+	void		addSeries(int n, ...);
+  
+	template <class iterator>
+	void	addNumber(iterator begin, iterator end)
+	{
+		if ((end - begin) <= _maxSize)
+		{
+			std::copy(begin, end, std::back_inserter(lst1));
+			_current += (end - begin);
+		}
+	}
+ 
 
 private:
 	std::list<int>	lst1;
-	const int		_maxSize;
+	int		_maxSize;
 	int				_current;
 
 };
